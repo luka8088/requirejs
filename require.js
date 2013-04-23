@@ -1612,7 +1612,11 @@ var requirejs, require, define;
              * @private
              */
             execCb: function (name, callback, args, exports) {
-                return callback.apply(exports, args);
+                try {
+                    return callback.apply(exports, args);
+                } catch (e) {
+                    return onError(e);
+                }
             },
 
             /**
